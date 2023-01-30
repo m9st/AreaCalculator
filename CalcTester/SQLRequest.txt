@@ -1,1 +1,37 @@
-﻿
+﻿CREATE TABLE IF NOT EXISTS product (
+  id int(6) unsigned NOT NULL,
+  name varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS product_category (
+  product_id int(6) unsigned NOT NULL,
+  category_id int(6) unsigned NOT NULL
+);
+
+INSERT INTO category VALUES (1, 'Category 1');
+INSERT INTO category VALUES (2, 'Category 2');
+INSERT INTO category VALUES (3, 'Category 3');
+
+INSERT INTO product VALUES (1, 'Product 1');
+INSERT INTO product VALUES (2, 'Product 2');
+INSERT INTO product VALUES (3, 'Product 3');
+
+INSERT INTO product_category VALUES (1,1);
+INSERT INTO product_category VALUES (1,2);
+INSERT INTO product_category VALUES (1,3);
+INSERT INTO product_category VALUES (2,3);
+INSERT INTO product_category VALUES (3,3);
+
+
+Запрос:
+
+SELECT 
+    t2.name AS product_name, 
+    t3.name AS category_name 
+FROM product_category t1 
+INNER JOIN 
+    product t2, 
+    category t3 
+WHERE 
+    t1.product_id = t2.id AND t1.category_id = t3.id
